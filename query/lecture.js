@@ -1,6 +1,25 @@
 const axios = require("axios");
 
-const useLectureListQuery = (nextLink) => {
+const useLectureListQuery = async () => {
+  let result = [];
+  try {
+    let next = "";
+    while (true) {
+      const fetchDataFunction = fetchCourseList(next);
+      const data = await fetchDataFunction();
+      result = [...result, ...data.results];
+
+      if (!data.next) break;
+      next = data.next;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+
+  return result;
+};
+
+const fetchCourseList = (nextLink) => {
   const lectureCode = process.env.LECTURE_CODE;
   const accessToken = process.env.ACCESS_TOKEN;
   const url =
