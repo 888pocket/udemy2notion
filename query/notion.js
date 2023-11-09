@@ -2,6 +2,8 @@ const { Client } = require("@notionhq/client");
 
 const useNotionMutation = async (data, isLecture, chapterName, index) => {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
+  const NOTION_DATABASE_LECTURE_ID = process.env.NOTION_DATABASE_LECTURE_ID;
+  const NOTION_DATABASE_COURSE_ID = process.env.NOTION_DATABASE_COURSE_ID;
 
   const multiSelect = [];
   if (data.asset && data.asset.asset_type == "Article") {
@@ -17,7 +19,7 @@ const useNotionMutation = async (data, isLecture, chapterName, index) => {
 
   const response = await notion.pages.create({
     parent: {
-      database_id: process.env.NOTION_DATABASE_COURSE_ID,
+      database_id: NOTION_DATABASE_COURSE_ID,
     },
     properties: {
       이름: {
@@ -59,4 +61,4 @@ const useNotionMutation = async (data, isLecture, chapterName, index) => {
   console.log(response);
 };
 
-module.exports = insertNotion;
+module.exports = useNotionMutation;
