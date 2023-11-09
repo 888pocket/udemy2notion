@@ -1,5 +1,4 @@
 const axios = require("axios");
-require("dotenv").config();
 
 const useLectureListQuery = (nextLink) => {
   const lectureCode = process.env.LECTURE_CODE;
