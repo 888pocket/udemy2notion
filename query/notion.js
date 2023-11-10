@@ -46,7 +46,7 @@ const useNotionMutation = async (data, isLecture, chapterName, index) => {
           name: chapterName,
         },
       },
-      Study: {
+      Lecture: {
         relation: [
           {
             id: NOTION_DATABASE_LECTURE_ID,
